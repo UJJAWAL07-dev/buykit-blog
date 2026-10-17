@@ -307,13 +307,19 @@
   outline: none;
   color: #1f2937;
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
 .blog-editor-content p,
 .blog-editor-preview p {
-  margin: 0 0 1em;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.blog-editor-content p:last-child,
+.blog-editor-preview p:last-child {
+  margin-bottom: 0;
 }
 
 .blog-editor-content h1,
@@ -630,5 +636,316 @@
     width: 32px;
     height: 32px;
     font-size: 18px;
+  }
+}
+/* Full article preview */
+
+.blog-preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px;
+  overflow-y: auto;
+  background: rgba(5, 8, 22, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.blog-preview-window {
+  width: min(1100px, 100%);
+  margin: auto;
+  overflow: hidden;
+  border: 1px solid rgba(145, 94, 255, 0.3);
+  border-radius: 18px;
+  background: #050816;
+  color: white;
+  box-shadow: 0 25px 100px rgba(0, 0, 0, 0.45);
+}
+
+.blog-preview-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 8, 22, 0.96);
+  backdrop-filter: blur(12px);
+}
+
+.blog-preview-label {
+  color: #a78bfa;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.blog-preview-toolbar p {
+  margin: 6px 0 0;
+  color: #aaa6c3;
+  font-size: 13px;
+}
+
+.blog-preview-close,
+.blog-preview-back-button {
+  flex-shrink: 0;
+  padding: 11px 16px;
+  border: 1px solid rgba(145, 94, 255, 0.5);
+  border-radius: 9px;
+  background: transparent;
+  color: white;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.blog-preview-close:hover,
+.blog-preview-back-button:hover {
+  background: #7047eb;
+  transform: translateY(-1px);
+}
+
+.blog-preview-article {
+  width: min(820px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 55px 0 35px;
+}
+
+.blog-preview-category {
+  margin-bottom: 20px;
+  color: #a78bfa;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.blog-preview-article > h1 {
+  margin: 0;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(38px, 5.5vw, 64px);
+  font-weight: 700;
+  line-height: 1.12;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.blog-preview-subtitle {
+  margin: 24px 0 0;
+  color: #aaa6c3;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.blog-preview-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 24px;
+  color: #aaa6c3;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+}
+
+.blog-preview-cover {
+  width: 100%;
+  max-height: 430px;
+  margin-top: 40px;
+  overflow: hidden;
+  border: 1px solid rgba(145, 94, 255, 0.25);
+  border-radius: 18px;
+  background: #111027;
+}
+
+.blog-preview-cover img {
+  display: block;
+  width: 100%;
+  max-height: 430px;
+  object-fit: cover;
+}
+
+.blog-preview-body {
+  margin-top: 45px;
+  color: #d1cee0;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.blog-preview-body p {
+  margin: 22px 0;
+}
+
+.blog-preview-body h1 {
+  margin: 40px 0 20px;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: 38px;
+  line-height: 1.25;
+}
+
+.blog-preview-body h2 {
+  margin: 45px 0 18px;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: 32px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.blog-preview-body h3 {
+  margin: 32px 0 14px;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: 25px;
+  line-height: 1.35;
+}
+
+.blog-preview-body ul,
+.blog-preview-body ol {
+  margin: 22px 0;
+  padding-left: 28px;
+}
+
+.blog-preview-body ul {
+  list-style: disc;
+}
+
+.blog-preview-body ol {
+  list-style: decimal;
+}
+
+.blog-preview-body li {
+  margin: 8px 0;
+}
+
+.blog-preview-body a {
+  color: #b49aff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.blog-preview-body blockquote {
+  margin: 28px 0;
+  padding: 16px 22px;
+  border-left: 4px solid #915eff;
+  border-radius: 0 10px 10px 0;
+  background: rgba(145, 94, 255, 0.08);
+}
+
+.blog-preview-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 28px auto;
+  border-radius: 12px;
+}
+
+.blog-preview-body table {
+  width: 100%;
+  margin: 25px 0;
+  border-collapse: collapse;
+}
+
+.blog-preview-body th,
+.blog-preview-body td {
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: left;
+}
+
+.blog-preview-body th {
+  background: rgba(145, 94, 255, 0.15);
+  color: white;
+}
+
+.blog-preview-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.blog-preview-tags span {
+  padding: 8px 13px;
+  border: 1px solid rgba(145, 94, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(145, 94, 255, 0.08);
+  color: #b49aff;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+}
+
+.blog-preview-footer {
+  display: flex;
+  justify-content: center;
+  padding: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(12, 10, 30, 0.8);
+}
+
+@media (max-width: 600px) {
+  .blog-preview-overlay {
+    padding: 8px;
+  }
+
+  .blog-preview-window {
+    border-radius: 12px;
+  }
+
+  .blog-preview-toolbar {
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .blog-preview-toolbar p {
+    max-width: 190px;
+    line-height: 1.5;
+  }
+
+  .blog-preview-close {
+    padding: 9px 10px;
+    font-size: 11px;
+  }
+
+  .blog-preview-article {
+    width: calc(100% - 32px);
+    padding-top: 35px;
+  }
+
+  .blog-preview-article > h1 {
+    font-size: 36px;
+  }
+
+  .blog-preview-subtitle {
+    font-size: 17px;
+  }
+
+  .blog-preview-body {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .blog-preview-body h1 {
+    font-size: 30px;
+  }
+
+  .blog-preview-body h2 {
+    font-size: 27px;
+  }
+
+  .blog-preview-body h3 {
+    font-size: 22px;
   }
 }

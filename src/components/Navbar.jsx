@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import './Navbar.css';
+import "./Navbar.css";
 import { Link } from "react-router-dom";
-import { FaUser, FaBriefcase, FaFolderOpen, FaEnvelope, FaLaptopCode } from 'react-icons/fa';
+import {
+  FaUser,
+  FaFolderOpen,
+  FaEnvelope,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 
 import { navLinks } from "../constants";
-import {logo, menu, close } from "../assets";
+import { menu, close } from "../assets";
 import { fadeIn } from "../utils/motion";
 
 const Navbar = () => {
@@ -13,162 +17,193 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const getIcon = (title) => {
+    const icons = {
+      About: FaUser,
+      Articles: FaFolderOpen,
+      Queries: FaEnvelope,
+    };
+
+    return icons[title] || FaUser;
+  };
+
+  const handleNavClick = (event, nav) => {
+    event.preventDefault();
+
+    setActive(nav.title);
+    setToggle(false);
+
+    const target = document.getElementById(nav.id);
+
+    if (!target) {
+      console.warn(`Navigation target not found: #${nav.id}`);
+      return;
+    }
+
+    const section = target.closest("section") || target.parentElement || target;
+    const navbarHeight = 100;
+
+    const targetPosition =
+      section.getBoundingClientRect().top +
+      window.scrollY -
+      navbarHeight;
+
+    window.scrollTo({
+      top: Math.max(0, targetPosition),
+      behavior: "smooth",
+    });
+
+    window.history.replaceState(null, "", `#${nav.id}`);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      // Handle transparent/colored/scrolled state
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(scrollTop > 100);
 
-      // Handle active section state (Scroll Spy)
-
-      // Guard: Check if we are in the Hero section (above the first nav section)
-      // This clears the active state when in the "gap" between top and the first section
-      const firstLink = navLinks[0];
-      if (firstLink) {
-        const element = document.getElementById(firstLink.id);
-        if (element && element.parentElement) {
-          const sectionTop = element.parentElement.offsetTop;
-          // If we are above the activation threshold of the first section
-          if (scrollTop < sectionTop - 100) {
-            setActive("");
-            return;
-          }
-        }
-      }
-
-      // Check if we're at the bottom of the page to activate the last link
-      // This helps with short 'Contact' sections
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
-        // Activate the last nav link
+      if (
+        window.innerHeight + scrollTop >=
+        document.documentElement.scrollHeight - 50
+      ) {
         const lastLink = navLinks[navLinks.length - 1];
-        if (lastLink) setActive(lastLink.title);
+
+        if (lastLink) {
+          setActive(lastLink.title);
+        }
+
         return;
       }
 
-      // Iterate through sections to find which one is in view
-      for (const nav of navLinks) {
-        const element = document.getElementById(nav.id);
-        if (element) {
-          // The ID is attached to a span inside the section (via SectionWrapper)
-          // We need the parent section to get the correct height
-          const section = element.parentElement;
-          if (section) {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
+      let currentSection = "";
 
-            // Check if scroll position is within this section
-            // (scrollTop + 100) provides a comfortable offset for highlighting the section as it enters
-            if (scrollTop >= sectionTop - 100 && scrollTop < sectionTop + sectionHeight - 100) {
-              setActive(nav.title);
-              break; // Stop checking once we find the active section
-            }
-          }
+      for (const nav of navLinks) {
+        const target = document.getElementById(nav.id);
+
+        if (!target) continue;
+
+        const section =
+          target.closest("section") ||
+          target.parentElement ||
+          target;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= 150 && rect.bottom > 150) {
+          currentSection = nav.title;
         }
       }
+
+      if (scrollTop < 100) {
+        currentSection = "";
+      }
+
+      setActive(currentSection);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  const renderNavLinks = (isMobile = false) =>
+    navLinks.map((nav) => {
+      const IconComponent = getIcon(nav.title);
+
+      return (
+        <li
+          key={nav.id}
+          className={`${
+            isMobile ? "mobile-nav-item" : "desktop-nav-item"
+          } ${active === nav.title ? "is-active" : ""}`}
+        >
+          <a
+            href={`#${nav.id}`}
+            className={
+              isMobile ? "mobile-nav-link" : "desktop-nav-link"
+            }
+            onClick={(event) => handleNavClick(event, nav)}
+          >
+            <IconComponent className="nav-link-icon" />
+            {nav.title}
+          </a>
+        </li>
+      );
+    });
 
   return (
     <motion.nav
       variants={fadeIn("down", "spring", 0.2, 1)}
       initial="hidden"
       animate="show"
-      className={`site-navbar ${scrolled ? "site-navbar--scrolled" : ""}`}
+      className={`site-navbar ${
+        scrolled ? "site-navbar--scrolled" : ""
+      }`}
     >
-      <div className='navbar-inner'>
+      <div className="navbar-inner">
         <Link
-          to='/'
-          className='navbar-brand'
+          to="/"
+          className="navbar-brand"
           onClick={() => {
             setActive("");
-            window.scrollTo(0, 0);
+            setToggle(false);
+            window.history.replaceState(
+              null,
+              "",
+              window.location.pathname
+            );
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
           }}
         >
-          <img src="/buykit.jpg" alt="BuyKit logo" className="navbar-logo" />
-          <p className='navbar-name'>
+          <img
+            src="/buykit.jpg"
+            alt="BuyKit logo"
+            className="navbar-logo"
+          />
+
+          <p className="navbar-name">
             BUYKIT
-            <span className='navbar-role'></span>
+            <span className="navbar-role"></span>
           </p>
         </Link>
 
-        <ul className='desktop-nav'>
-          {navLinks.map((nav) => {
-            const IconComponent = {
-              "About": FaUser,
-              "Work": FaBriefcase,
-              "Skills": FaLaptopCode,
-              "Projects": FaFolderOpen,
-              "Contact": FaEnvelope
-            }[nav.title] || FaUser;
-
-            return (
-              <li
-                key={nav.id}
-                className={`desktop-nav-item ${active === nav.title ? "is-active" : ""}`}
-                onClick={() => setActive(nav.title)}
-              >
-                <a href={`#${nav.id}`} className="desktop-nav-link">
-                  <IconComponent className='nav-link-icon' />
-                  {nav.title}
-                </a>
-              </li>
-            );
-          })}
+        <ul className="desktop-nav">
+          {renderNavLinks()}
         </ul>
 
-        <div className='mobile-nav'>
+        <div className="mobile-nav">
           <button
-            type='button'
-            className='mobile-menu-button'
-            aria-label={toggle ? "Close navigation menu" : "Open navigation menu"}
+            type="button"
+            className="mobile-menu-button"
+            aria-label={
+              toggle ? "Close navigation menu" : "Open navigation menu"
+            }
             aria-expanded={toggle}
-            onClick={() => setToggle(!toggle)}
+            onClick={() => setToggle((previous) => !previous)}
           >
             <img
               src={toggle ? close : menu}
-              alt=''
-              className='mobile-menu-icon'
+              alt=""
+              className="mobile-menu-icon"
             />
           </button>
 
           <div
-            className={`mobile-menu-panel ${toggle ? "is-open" : ""}`}
+            className={`mobile-menu-panel ${
+              toggle ? "is-open" : ""
+            }`}
           >
-            <ul className='mobile-nav-list'>
-              {navLinks.map((nav) => {
-                const IconComponent = {
-                  "About": FaUser,
-                  "Work": FaBriefcase,
-                  "Skills": FaLaptopCode,
-                  "Projects": FaFolderOpen,
-                  "Contact": FaEnvelope
-                }[nav.title] || FaUser;
-
-                return (
-                  <li
-                    key={nav.id}
-                    className={`mobile-nav-item ${active === nav.title ? "is-active" : ""}`}
-                    onClick={() => {
-                      setToggle(false);
-                      setActive(nav.title);
-                    }}
-                  >
-                    <a href={`#${nav.id}`} className="mobile-nav-link">
-                      <IconComponent className='nav-link-icon' />
-                      {nav.title}
-                    </a>
-                  </li>
-                );
-              })}
+            <ul className="mobile-nav-list">
+              {renderNavLinks(true)}
             </ul>
           </div>
         </div>

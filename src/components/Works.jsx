@@ -8,6 +8,8 @@ import { supabase } from "../lib/supabase";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 
+const ARTICLES_PER_LOAD = 3;
+
 const getPlainText = (node) => {
   if (!node) return "";
 
@@ -167,6 +169,7 @@ const ArticleCard = ({
 
 const Works = () => {
   const [articles, setArticles] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(ARTICLES_PER_LOAD);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -209,6 +212,7 @@ const Works = () => {
           }));
 
         setArticles(formattedArticles);
+        setVisibleCount(ARTICLES_PER_LOAD);
       } catch (fetchError) {
         console.error(
           "Failed to fetch published articles:",
@@ -234,6 +238,15 @@ const Works = () => {
 
   const openBlogEditor = () => {
     window.location.href = "/write-blog";
+  };
+
+  const visibleArticles = articles.slice(0, visibleCount);
+  const hasMoreArticles = visibleCount < articles.length;
+
+  const exploreMore = () => {
+    setVisibleCount((currentCount) =>
+      Math.min(currentCount + ARTICLES_PER_LOAD, articles.length)
+    );
   };
 
   return (
@@ -282,25 +295,44 @@ const Works = () => {
       )}
 
       {!loading && !error && articles.length > 0 && (
-        <div className="projects-grid">
-          {articles.map((article) => (
-            <ArticleCard
-              key={article.slug}
-              {...article}
-            />
-          ))}
-        </div>
+        <>
+          <div className="projects-grid">
+            {visibleArticles.map((article) => (
+              <ArticleCard
+                key={article.slug}
+                {...article}
+              />
+            ))}
+          </div>
+
+          {hasMoreArticles && (
+            <div
+              className="flex w-full justify-center"
+              style={{ marginTop: "40px" }}
+            >
+              <button
+                type="button"
+                onClick={exploreMore}
+                className="inline-flex items-center gap-3 rounded-xl border border-[#915eff] bg-transparent px-8 py-4 font-bold uppercase tracking-wide text-white shadow-lg shadow-[#915eff]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-[#915eff] hover:shadow-[#915eff]/30 focus:outline-none focus:ring-2 focus:ring-[#915eff] focus:ring-offset-2 focus:ring-offset-[#050816]"
+                aria-label="Load three more articles"
+              >
+                <FaBookOpen aria-hidden="true" />
+                <span>EXPLORE MORE</span>
+              </button>
+            </div>
+          )}
+        </>
       )}
 
       <div
-        className="flex w-full justify-start"
+        className="flex w-full flex-col items-center gap-5"
         style={{ marginTop: "30px" }}
       >
         <button
           type="button"
-          className="inline-flex items-center gap-3 rounded-xl bg-[#915eff] px-7 py-4 font-bold uppercase tracking-wide text-white shadow-lg shadow-[#915eff]/20 transition-all duration-300 hover:-translate-y-1 hover:bg-[#7c4dff] focus:outline-none focus:ring-2 focus:ring-[#915eff] focus:ring-offset-2 focus:ring-offset-[#050816]"
+          className="inline-flex items-center justify-center gap-3 rounded-xl border border-[#915eff] bg-transparent px-8 py-4 font-bold uppercase tracking-wide text-white shadow-lg shadow-[#915eff]/10 transition-all duration-300 hover:-translate-y-1 hover:bg-[#915eff] hover:shadow-[#915eff]/30 focus:outline-none focus:ring-2 focus:ring-[#915eff] focus:ring-offset-2 focus:ring-offset-[#050816]"
           onClick={openBlogEditor}
-        >
+      >
           <FaPenNib aria-hidden="true" />
           <span>PUBLISH YOUR OWN ARTICLE</span>
         </button>

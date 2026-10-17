@@ -13,6 +13,7 @@ import { TableCell } from "@tiptap/extension-table-cell";
 import { TableHeader } from "@tiptap/extension-table-header";
 import { supabase } from "../lib/supabase";
 import "./BlogEditor.css";
+import "./BlogEditor.preview.css";
 import { FaTrashAlt } from "react-icons/fa";
 
 const DRAFT_KEY = "buykit_blog_draft";
@@ -338,6 +339,79 @@ const BlogEditor = () => {
           Back to BuyKit
         </Link>
       </header>
+
+      {preview && (
+        <div
+          className="blog-preview-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="blog-preview-title"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setPreview(false);
+          }}
+        >
+          <div className="blog-preview-window">
+            <div className="blog-preview-toolbar">
+              <div>
+                <span className="blog-preview-label">ARTICLE PREVIEW</span>
+                <p>This is a preview. Your article has not been published.</p>
+              </div>
+              <button
+                type="button"
+                className="blog-preview-close"
+                onClick={() => setPreview(false)}
+              >
+                Back to Editor ✕
+              </button>
+            </div>
+
+            <article className="blog-preview-article">
+              <div className="blog-preview-category">
+                {fields.category || "Technology"}
+              </div>
+              <h1 id="blog-preview-title">
+                {fields.title.trim() || "Your Article Title"}
+              </h1>
+              {fields.subtitle.trim() && (
+                <p className="blog-preview-subtitle">{fields.subtitle.trim()}</p>
+              )}
+              <div className="blog-preview-meta">
+                <span>By {fields.author.trim() || "Your Name"}</span>
+                <span>Preview · Not published</span>
+              </div>
+
+              {coverImagePreview && (
+                <div className="blog-preview-cover">
+                  <img src={coverImagePreview} alt="Article cover" />
+                </div>
+              )}
+
+              <div
+                className="blog-preview-body"
+                dangerouslySetInnerHTML={{ __html: editor.getHTML() }}
+              />
+
+              {fields.tags.trim() && (
+                <div className="blog-preview-tags">
+                  {fields.tags.split(",").map((tag) => tag.trim()).filter(Boolean).map((tag, index) => (
+                    <span key={`${tag}-${index}`}>#{tag}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+
+            <div className="blog-preview-footer">
+              <button
+                type="button"
+                className="blog-preview-back-button"
+                onClick={() => setPreview(false)}
+              >
+                ← Continue Writing
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="blog-editor-container">
         <div className="blog-editor-heading">
@@ -725,16 +799,7 @@ const BlogEditor = () => {
           </div>
 
           <div className="blog-editor-paper">
-            {preview ? (
-              <div
-                className="blog-editor-preview"
-                dangerouslySetInnerHTML={{
-                  __html: editor.getHTML(),
-                }}
-              />
-            ) : (
-              <EditorContent editor={editor} />
-            )}
+            <EditorContent editor={editor} />
           </div>
         </section>
 
@@ -756,9 +821,9 @@ const BlogEditor = () => {
           <button
             type="button"
             className="blog-editor-secondary"
-            onClick={() => setPreview((previous) => !previous)}
+            onClick={() => setPreview(true)}
           >
-            {preview ? "Back to Editor" : "Preview"}
+            Preview
           </button>
 
           <button
