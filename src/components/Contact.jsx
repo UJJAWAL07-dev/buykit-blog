@@ -1,187 +1,262 @@
 import React, { useRef, useState } from "react";
 import './Contact.css';
-import { MdContactMail, MdEmail, MdMessage, MdPhone } from 'react-icons/md';
+
+import {
+  MdContactMail,
+  MdEmail,
+  MdTitle,
+  MdArticle,
+  MdLightbulb,
+  MdSend,
+} from 'react-icons/md';
+
 import { FaUser } from 'react-icons/fa';
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
-import PhoneInputLib from 'react-phone-input-2';
-const PhoneInput = PhoneInputLib.default ?? PhoneInputLib;
-import 'react-phone-input-2/lib/style.css';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
   const formRef = useRef();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
-    phone: "",
-    message: "",
+    subject: "",
+    query: "",
+    suggestions: "",
   });
 
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { target } = e;
-    const { name, value } = target;
+    const { name, value } = e.target;
 
-    setForm({
-      ...form,
+    setForm((previous) => ({
+      ...previous,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (loading) return;
+
+    if (
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.subject.trim() ||
+      !form.query.trim()
+    ) {
+      toast.error("Please complete all required fields.");
+      return;
+    }
+
     setLoading(true);
 
-    if (!form.name || !form.email || !form.message) {
-      setLoading(false);
-      toast.error('Please fill in all fields.');
-      return;
-    }
-
-    const serviceId = import.meta.env.VITE_APP_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      setLoading(false);
-      toast.error("Email service not configured. Please check your .env file.");
-      console.error("Missing EmailJS environment variables: ", { serviceId, templateId, publicKey });
-      return;
-    }
-
-    emailjs
-      .send(
-        serviceId,
-        templateId,
-        {
-          from_name: form.name,
-          to_name: "JavaScript Mastery",
-          from_email: form.email,
-          to_email: "yashsrivastava561@gmail.com",
-          message: `${form.message}\n\n---\nPhone: ${form.phone}`,
-        },
-        publicKey
-      )
-      .then(
-        () => {
-          setLoading(false);
-          toast.success("Thank you. I will get back to you as soon as possible.");
-
-          setForm({
-            name: "",
-            email: "",
-            phone: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-
-          toast.error("Ahh, something went wrong. Please try again.");
-        }
+    try {
+      const existingQueries = JSON.parse(
+        localStorage.getItem("buykit_queries") || "[]"
       );
+
+      const newQuery = {
+        id: Date.now(),
+        name: form.name.trim(),
+        email: form.email.trim(),
+        subject: form.subject.trim(),
+        query: form.query.trim(),
+        suggestions: form.suggestions.trim(),
+        submittedAt: new Date().toISOString(),
+      };
+
+      localStorage.setItem(
+        "buykit_queries",
+        JSON.stringify([newQuery, ...existingQueries])
+      );
+
+      setForm({
+        name: "",
+        email: "",
+        subject: "",
+        query: "",
+        suggestions: "",
+      });
+
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+
+      toast.success("Your query has been submitted successfully!");
+    } catch (error) {
+      console.error("Query submission error:", error);
+      toast.error("Unable to save your query. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div
       className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
     >
+
+      {/* LEFT SIDE — ASK YOUR QUERY */}
+
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
         className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
       >
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact. <MdContactMail className="inline-block" /></h3>
+
+        <p className={styles.sectionSubText}>
+          Ask Your Query
+        </p>
+
+        <h3 className={styles.sectionHeadText}>
+          Get In Touch.
+          <MdContactMail className="inline-block" />
+        </h3>
 
         <form
           ref={formRef}
           onSubmit={handleSubmit}
           className='mt-12 flex flex-col gap-8'
         >
+
+          {/* YOUR NAME */}
+
           <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4 flex items-center gap-2'><FaUser /> Your Name</span>
+
+            <span className='text-white font-medium mb-4 flex items-center gap-2'>
+              <FaUser />
+              Your Name
+            </span>
+
             <input
               type='text'
               name='name'
               value={form.name}
               onChange={handleChange}
-              placeholder="What's your good name?"
+              placeholder="Enter your name"
+              autoComplete="name"
+              maxLength={100}
+              required
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
+
           </label>
+
+          {/* EMAIL */}
+
           <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4 flex items-center gap-2'><MdEmail /> Your email</span>
+
+            <span className='text-white font-medium mb-4 flex items-center gap-2'>
+              <MdEmail />
+              Your Email
+            </span>
+
             <input
               type='email'
               name='email'
               value={form.email}
               onChange={handleChange}
-              placeholder="What's your web address?"
+              placeholder="Enter your email address"
+              autoComplete="email"
+              maxLength={254}
+              required
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
+
           </label>
+
+          {/* SUBJECT */}
+
           <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4 flex items-center gap-2'><MdPhone /> Phone Number</span>
-            <PhoneInput
-              country={'in'}
-              value={form.phone}
-              onChange={phone => setForm({ ...form, phone })}
-              inputStyle={{
-                width: '100%',
-                height: '58px',
-                backgroundColor: '#151030',
-                border: 'none',
-                borderRadius: '0.5rem',
-                color: 'white',
-                paddingLeft: '48px',
-                fontSize: '16px',
-                fontWeight: '500'
-              }}
-              buttonStyle={{
-                backgroundColor: '#151030',
-                border: 'none',
-                borderRadius: '0.5rem 0 0 0.5rem',
-                paddingLeft: '5px'
-              }}
-              dropdownStyle={{
-                backgroundColor: '#151030',
-                color: 'white',
-                border: '1px solid #aaa6c3'
-              }}
-              containerStyle={{
-                width: '100%',
-              }}
+
+            <span className='text-white font-medium mb-4 flex items-center gap-2'>
+              <MdTitle />
+              Subject
+            </span>
+
+            <input
+              type='text'
+              name='subject'
+              value={form.subject}
+              onChange={handleChange}
+              placeholder="Enter the subject of your query"
+              maxLength={200}
+              required
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
+
           </label>
+
+          {/* YOUR QUERY */}
+
           <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4 flex items-center gap-2'><MdMessage /> Your Message</span>
+
+            <span className='text-white font-medium mb-4 flex items-center gap-2'>
+              <MdArticle />
+              Your Query
+            </span>
+
             <textarea
               rows={7}
-              name='message'
-              value={form.message}
+              name='query'
+              value={form.query}
               onChange={handleChange}
-              placeholder='What you want to say?'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              placeholder="Write your query here..."
+              maxLength={10000}
+              required
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium resize-y'
             />
+
           </label>
+
+          {/* SUGGESTIONS */}
+
+          <label className='flex flex-col'>
+
+            <span className='text-white font-medium mb-4 flex items-center gap-2'>
+              <MdLightbulb />
+              Suggestions
+              <span className="text-secondary text-sm font-normal">
+                (Optional)
+              </span>
+            </span>
+
+            <textarea
+              rows={5}
+              name='suggestions'
+              value={form.suggestions}
+              onChange={handleChange}
+              placeholder="Share your suggestions with us..."
+              maxLength={5000}
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium resize-y'
+            />
+
+          </label>
+
+          {/* SUBMIT BUTTON */}
 
           <button
             type='submit'
-            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
+            disabled={loading}
+            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary disabled:opacity-50'
           >
-            {loading ? "Sending..." : "Send"}
+            {loading ? "Submitting..." : "Submit Query"}
           </button>
+
         </form>
+
       </motion.div>
+
+      {/* RIGHT SIDE — ORIGINAL EARTH CANVAS */}
 
       <motion.div
         variants={slideIn("right", "tween", 0.2, 1)}
@@ -189,6 +264,9 @@ const Contact = () => {
       >
         <EarthCanvas />
       </motion.div>
+
+      {/* TOAST NOTIFICATIONS */}
+
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
@@ -201,6 +279,7 @@ const Contact = () => {
         pauseOnHover
         theme="dark"
       />
+
     </div>
   );
 };

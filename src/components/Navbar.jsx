@@ -5,7 +5,7 @@ import { FaUser, FaBriefcase, FaFolderOpen, FaEnvelope, FaLaptopCode } from 'rea
 import { motion } from "framer-motion";
 
 import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import {logo, menu, close } from "../assets";
 import { fadeIn } from "../utils/motion";
 
 const Navbar = () => {
@@ -93,10 +93,10 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt='logo' className='navbar-logo' />
+          <img src="/buykit.jpg" alt="BuyKit logo" className="navbar-logo" />
           <p className='navbar-name'>
-            Tanmay
-            <span className='navbar-role'>| Srivastava</span>
+            BUYKIT
+            <span className='navbar-role'></span>
           </p>
         </Link>
 

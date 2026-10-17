@@ -16,15 +16,15 @@ const Hero = () => {
 
         <div className='hero-copy'>
           <h1 className='hero-title'>
-            Hi, I'm{" "}
-            <motion.span
-              variants={textVariant(0.5)}
-              initial='hidden'
-              whileInView='show'
-              viewport={{ once: false, amount: 0.25 }}
-              className='hero-name'
+           <span style={{ color: '#ffffff' }}>BUY</span>
+           <motion.span
+             variants={textVariant(0.5)}
+             initial='hidden'
+             whileInView='show'
+             viewport={{ once: false, amount: 0.25 }}
+             className='hero-name'
             >
-              Tanmay
+             KIT
             </motion.span>
           </h1>
 
@@ -35,8 +35,8 @@ const Hero = () => {
             viewport={{ once: false, amount: 0.25 }}
             className='hero-subtitle'
           >
-            I develop 3D visuals, user <br className='hero-line-break' />
-            interfaces and web applications
+            FRESH PERSPECTIVES <br className='hero-line-break' />
+            ON EVERYTHING THAT MATTERS.
           </motion.p>
 
           <motion.div

@@ -227,3 +227,36 @@
     margin-top: 18px;
   }
 }
+.cyber-djinn-canvas {
+  position: absolute;
+  top: 10%;
+  right: 2%;
+  width: 55%;
+  height: 80%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cyber-djinn-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.hero-copy-wrap {
+  z-index: 2;
+}
+
+.hero-scroll-indicator {
+  z-index: 3;
+}
+
+@media screen and (max-width: 768px) {
+  .cyber-djinn-canvas {
+    top: 30%;
+    right: -5%;
+    width: 75%;
+    height: 55%;
+  }
+}

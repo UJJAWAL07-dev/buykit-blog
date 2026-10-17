@@ -26,7 +26,7 @@ const ServiceCard = ({ index, title, icon }) => (
       >
         <img
           src={icon}
-          alt='web-development'
+          alt='service'
           className='w-16 h-16 object-contain'
         />
 
@@ -41,47 +41,88 @@ const ServiceCard = ({ index, title, icon }) => (
 const About = () => {
   return (
     <>
+      {/* Section Heading */}
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} font-["Playfair_Display"] italic tracking-wider text-secondary text-[18px]`}>Introduction</p>
-        <h2 className={`${styles.sectionHeadText} font-["Oswald"] font-bold uppercase tracking-wider`}>Overview. <FaUserGraduate className="inline-block" /></h2>
+        <p
+          className={`${styles.sectionSubText} font-["Playfair_Display"] italic tracking-wider text-secondary text-[18px]`}
+        >
+          Introduction
+        </p>
+
+        <h2
+          className={`${styles.sectionHeadText} font-["Oswald"] font-bold uppercase tracking-wider`}
+        >
+          About BuyKit. <FaUserGraduate className="inline-block" />
+        </h2>
       </motion.div>
 
+      {/* BuyKit Introduction */}
       <div className='flex flex-col-reverse gap-10 md:flex-row md:items-center'>
+
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
           className='m-[6px] p-[8px] text-secondary text-[17px] max-w-3xl leading-[30px] font-["Inter"] font-normal'
         >
-          I'm a skilled <strong className="font-['Orbitron'] text-[#915eff]">software developer</strong> with experience in <strong className="font-['Orbitron'] text-[#915eff]">TypeScript</strong> and
-          <strong className="font-['Orbitron'] text-[#915eff]">JavaScript</strong>, and expertise in frameworks like <strong className="font-['Orbitron'] text-[#915eff]">React</strong>, <strong className="font-['Orbitron'] text-[#915eff]">Node.js</strong>, and
-          <strong className="font-['Orbitron'] text-[#915eff]">Three.js</strong>. I also work extensively with <strong className="font-['Orbitron'] text-[#915eff]">Next.js</strong> for building modern web applications,
-          <strong className="font-['Orbitron'] text-[#915eff]">Chart.js</strong> for creating beautiful data visualizations, and animation libraries like
-          <strong className="font-['Orbitron'] text-[#915eff]">GSAP</strong> and <strong className="font-['Orbitron'] text-[#915eff]">Anime.js</strong> to bring interfaces to life with smooth, engaging animations.
-          I'm a quick learner and collaborate closely with clients to
-          create efficient, scalable, and <strong className="font-['Orbitron'] text-[#915eff]">user-friendly</strong> solutions that solve
-          real-world problems. Let's work together to bring your ideas to <strong className="font-['Orbitron'] text-[#915eff]">life</strong>!
+          <strong className="font-['Orbitron'] text-[#915eff]">
+            BuyKit
+          </strong>{" "}
+          is a technology-focused platform built to bring a fresh perspective
+          to everything that matters in the digital world. From{" "}
+          <strong className="font-['Orbitron'] text-[#915eff]">
+            AI
+          </strong>{" "}
+          and emerging technologies to software, gadgets, apps, cybersecurity,
+          and the internet, we explore the ideas and innovations shaping the
+          future.
+
           <br />
-          <span className="text-white font-['Sacramento'] text-[32px] block mt-4 opacity-80 rotate-[-2deg]">
-            Tanmay .
-          </span>
+          <br />
+
+          Our goal is simple: make technology easier to understand, more
+          interesting to explore, and genuinely useful in everyday life.
+          Whether you're looking for the latest{" "}
+          <strong className="font-['Orbitron'] text-[#915eff]">
+            tech insights
+          </strong>
+          , practical guides, product discoveries, or thoughtful perspectives
+          on what's next, BuyKit brings it all together in one place.
+
+          <br />
+          <br />
+
+          <strong className="font-['Orbitron'] text-[#915eff]">
+            Stay curious. Stay informed. See technology differently.
+          </strong>
         </motion.p>
+
+        {/* BuyKit Visual */}
         <motion.div
           variants={fadeIn("left", "", 0.2, 1)}
           className='w-full md:w-auto flex justify-center'
         >
           <div className='relative w-[200px] h-[200px] md:w-[250px] md:h-[250px]'>
+
             <img
               src={potrait}
-              alt='profile'
+              alt='BuyKit'
               className='w-full h-full object-cover rounded-full border-4 border-white/10 shadow-card'
             />
+
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#915eff] to-transparent opacity-30" />
+
           </div>
         </motion.div>
+
       </div>
 
+      {/* Service Cards */}
       <div className='mt-20 flex flex-wrap gap-10'>
         {services.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
+          <ServiceCard
+            key={service.title}
+            index={index}
+            {...service}
+          />
         ))}
       </div>
     </>

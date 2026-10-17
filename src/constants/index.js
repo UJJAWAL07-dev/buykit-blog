@@ -1,4 +1,14 @@
 import {
+  FaBrain,
+  FaMobileAlt,
+  FaCode,
+  FaMicrochip,
+  FaGlobe,
+  FaShieldAlt,
+  FaBookOpen,
+  FaStar,
+} from "react-icons/fa";
+import {
   mobile,
   backend,
   creator,
@@ -53,146 +63,120 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Web Developer",
+    title: "Tech Insights",
     icon: web,
   },
   {
-    title: "React Native Developer",
+    title: "AI & Future Tech",
     icon: mobile,
   },
   {
-    title: "Backend Developer",
+    title: "Gadgets & Software",
     icon: backend,
   },
   {
-    title: "Content Creator",
+    title: "Guides & Reviews",
     icon: creator,
   },
 ];
 
 const technologies = [
   {
-    name: "HTML 5",
-    icon: html,
-    level: "Expert",
+    name: "AI & Machine Learning",
+    icon: FaBrain,
+    label: "EXPLORE",
   },
   {
-    name: "CSS 3",
-    icon: css,
-    level: "Expert",
+    name: "Gadgets & Devices",
+    icon: FaMobileAlt,
+    label: "DISCOVER",
   },
   {
-    name: "JavaScript",
-    icon: javascript,
-    level: "Expert",
+    name: "Apps & Software",
+    icon: FaCode,
+    label: "DISCOVER",
   },
   {
-    name: "TypeScript",
-    icon: typescript,
-    level: "Advanced",
+    name: "Emerging Technology",
+    icon: FaMicrochip,
+    label: "EXPLORE",
   },
   {
-    name: "React JS",
-    icon: reactjs,
-    level: "Expert",
+    name: "Internet & Web",
+    icon: FaGlobe,
+    label: "EXPLORE",
   },
   {
-    name: "Redux Toolkit",
-    icon: redux,
-    level: "Intermediate",
+    name: "Cybersecurity",
+    icon: FaShieldAlt,
+    label: "LEARN",
   },
   {
-    name: "Tailwind CSS",
-    icon: tailwind,
-    level: "Expert",
+    name: "How-To & Guides",
+    icon: FaBookOpen,
+    label: "LEARN",
   },
   {
-    name: "Node JS",
-    icon: nodejs,
-    level: "Advanced",
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-    level: "Intermediate",
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
-    level: "Intermediate",
-  },
-  {
-    name: "git",
-    icon: git,
-    level: "Advanced",
-  },
-  {
-    name: "figma",
-    icon: figma,
-    level: "Intermediate",
-  },
-  {
-    name: "docker",
-    icon: docker,
-    level: "Intermediate",
+    name: "Reviews & Insights",
+    icon: FaStar,
+    label: "READ",
   },
 ];
 
 const experiences = [
   {
-    title: "React.js Developer",
-    company_name: "Starbucks",
-    icon: starbucks,
+    title: "BuyKit Is Born",
+    company_name: "The Beginning",
+    icon: "/buykit.jpg",
     iconBg: "#383E56",
-    date: "March 2020 - April 2021",
-    skills: ["React", "JavaScript", "Redux", "CSS"],
+    date: "Phase 01",
+    skills: ["Vision", "Foundation", "Digital Platform", "BuyKit"],
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "BuyKit was created with the vision of building a platform that could bring useful digital resources, people, and technology together under one roof.",
+      "The initial concept focused on creating something flexible that could evolve with changing needs in the digital world.",
+      "This foundation became the starting point for the different directions BuyKit would explore over time.",
     ],
   },
+
   {
-    title: "React Native Developer",
-    company_name: "Tesla",
-    icon: tesla,
+    title: "Creator Connect",
+    company_name: "Influencer Guiding Platform",
+    icon: "/buykit.jpg",
     iconBg: "#E6DEDD",
-    date: "Jan 2021 - Feb 2022",
-    skills: ["React Native", "TypeScript", "Mobile", "API"],
+    date: "Phase 02",
+    skills: ["Influencers", "Freelancers", "Creators", "Collaboration"],
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "BuyKit evolved into a platform designed to help influencers and creators find the right freelancers for their projects.",
+      "The platform aimed to make it easier for creators to discover people with the skills needed to turn their ideas into reality.",
+      "This phase focused on connecting creators with the right talent and making digital collaboration simpler.",
     ],
   },
+
   {
-    title: "Web Developer",
-    company_name: "Shopify",
-    icon: shopify,
+    title: "BuyKit Tools",
+    company_name: "Digital Utility Platform",
+    icon: "/buykit.jpg",
     iconBg: "#383E56",
-    date: "Jan 2022 - Jan 2023",
-    skills: ["HTML", "CSS", "JavaScript", "Shopify"],
+    date: "Phase 03",
+    skills: ["Tools", "Productivity", "Image To PDF", "Utilities"],
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "BuyKit expanded beyond creator connections and began providing useful online tools for everyday digital tasks.",
+      "Tools such as image-to-PDF conversion were introduced to make common file and productivity tasks faster and easier.",
+      "The focus shifted toward building simple, accessible utilities that anyone could use without unnecessary complexity.",
     ],
   },
+
   {
-    title: "Full stack Developer",
-    company_name: "Meta",
-    icon: meta,
+    title: "BuyKit Insights",
+    company_name: "Technology Blogging Platform",
+    icon: "/buykit.jpg",
     iconBg: "#E6DEDD",
-    date: "Jan 2023 - Present",
-    skills: ["React", "Node.js", "MongoDB", "AWS"],
+    date: "Phase 04 - Present",
+    skills: ["Technology", "AI", "Gadgets", "Insights"],
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "BuyKit is now evolving into a technology-focused blogging platform covering AI, software, gadgets, emerging technologies, and digital trends.",
+      "The goal is to make technology easier to understand through useful insights, practical guides, discoveries, and engaging perspectives.",
+      "This marks the next chapter of BuyKit — a platform built to explore what is happening in technology today and what could shape tomorrow.",
     ],
   },
 ];
@@ -227,133 +211,156 @@ const testimonials = [
   },
 ];
 
-const projects = [
+const articles = [
   {
-    name: "Car Rent",
+    slug: "future-of-ai",
+    title: "The Future of AI",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+      "Artificial intelligence is rapidly transforming the way we work, create, communicate, and interact with technology. Here's what the future could look like.",
+    category: "AI & Future Tech",
+    date: "October 2026",
+    readTime: "6 min read",
     tags: [
       {
-        name: "react",
+        name: "AI",
         color: "blue-text-gradient",
       },
       {
-        name: "mongodb",
+        name: "Future Tech",
         color: "green-text-gradient",
       },
       {
-        name: "tailwind",
+        name: "Innovation",
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
-    source_code_link: "https://github.com/",
+    image: "/future of ai.webp",
   },
+
   {
-    name: "Job IT",
+    slug: "tech-tools-you-should-know",
+    title: "Tech Tools You Should Know",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "Discover powerful technology tools that can make everyday digital work faster, smarter, and more productive.",
+    category: "Tech Tools",
+    date: "October 2026",
+    readTime: "5 min read",
     tags: [
       {
-        name: "react",
+        name: "Tools",
         color: "blue-text-gradient",
       },
       {
-        name: "restapi",
+        name: "Software",
         color: "green-text-gradient",
       },
       {
-        name: "scss",
+        name: "Productivity",
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
-    source_code_link: "https://github.com/",
+    image: "/tech tools.jpg",
   },
+
   {
-    name: "Trip Guide",
+    slug: "ai-is-changing-how-we-work",
+    title: "AI Is Changing How We Work",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+      "AI is moving beyond experiments and becoming part of everyday workflows. Explore how intelligent tools are changing the way people work and create.",
+    category: "Artificial Intelligence",
+    date: "October 2026",
+    readTime: "5 min read",
     tags: [
       {
-        name: "nextjs",
+        name: "AI",
         color: "blue-text-gradient",
       },
       {
-        name: "supabase",
+        name: "Work",
         color: "green-text-gradient",
       },
       {
-        name: "css",
+        name: "Technology",
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
+    image: "/working ai.jpg",
   },
+
   {
-    name: "Weather Web",
+    slug: "gadgets-shaping-tomorrow",
+    title: "The Gadgets Shaping Tomorrow",
     description:
-      "A real-time weather dashboard providing accurate forecasts, conditions, and detailed meteorological data with a sleek, dark-mode user interface.",
+      "From smarter devices to futuristic hardware, discover the gadgets pushing technology forward and changing how we interact with the digital world.",
+    category: "Gadgets",
+    date: "October 2026",
+    readTime: "5 min read",
     tags: [
       {
-        name: "javascript",
+        name: "Gadgets",
         color: "blue-text-gradient",
       },
       {
-        name: "api",
+        name: "Hardware",
         color: "green-text-gradient",
       },
       {
-        name: "css",
+        name: "Future Tech",
         color: "pink-text-gradient",
       },
     ],
-    image: weather,
-    source_code_link: "https://tacticalreader.github.io/WEATHER-WEB/",
+    image: "/gadgets.webp",
   },
+
   {
-    name: "Calendar App",
+    slug: "ai-changing-the-internet",
+    title: "How AI Is Changing the Internet",
     description:
-      "A modern, intuitive calendar application for managing events and schedules, featuring day, week, and month views with color-coded organization.",
+      "Search, content, social platforms, recommendations and the way we discover information are all being transformed by artificial intelligence.",
+    category: "Internet & AI",
+    date: "October 2026",
+    readTime: "6 min read",
     tags: [
       {
-        name: "javascript",
+        name: "AI",
         color: "blue-text-gradient",
       },
       {
-        name: "html",
+        name: "Internet",
         color: "green-text-gradient",
       },
       {
-        name: "css",
+        name: "Digital",
         color: "pink-text-gradient",
       },
     ],
-    image: calendar,
-    source_code_link: "https://tacticalreader.github.io/Calendar-App/",
+    image: "/internet.jpg",
   },
+
   {
-    name: "Restaurant Template",
+    slug: "cybersecurity-what-you-need-to-know",
+    title: "Cybersecurity: What You Need to Know",
     description:
-      "An elegant, responsive landing page template for restaurants, showcasing menus, reservations, and a gallery with a premium visual design.",
+      "As more of our lives move online, understanding digital security is becoming essential. Here's what everyone should know about staying safer online.",
+    category: "Cybersecurity",
+    date: "October 2026",
+    readTime: "7 min read",
     tags: [
       {
-        name: "html",
+        name: "Security",
         color: "blue-text-gradient",
       },
       {
-        name: "css",
+        name: "Privacy",
         color: "green-text-gradient",
       },
       {
-        name: "javascript",
+        name: "Cybersecurity",
         color: "pink-text-gradient",
       },
     ],
-    image: restaurant,
-    source_code_link: "https://github.com/TacticalReader/Restaurant-template-website",
+    image: "/security.jpg",
   },
 ];
 
-export { services, technologies, experiences, testimonials, projects };
+export { services, technologies, experiences, testimonials, articles };

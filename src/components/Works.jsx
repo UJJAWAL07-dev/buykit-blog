@@ -1,67 +1,159 @@
-import React from "react";
-import './Works.css';
-import { FaCode, FaExternalLinkAlt, FaLaptopCode } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Works.css";
+import { FaBookOpen, FaExternalLinkAlt, FaPenNib } from "react-icons/fa";
 import Tilt from "react-parallax-tilt";
 
+import { supabase } from "../lib/supabase";
 import { styles } from "../styles";
-import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
-import { projects } from "../constants";
 
-const ProjectCard = ({
-  name,
+const getPlainText = (node) => {
+  if (!node) return "";
+
+  if (node.type === "text") {
+    return node.text || "";
+  }
+
+  if (!Array.isArray(node.content)) {
+    return "";
+  }
+
+  return node.content.map(getPlainText).join(" ");
+};
+
+const calculateReadTime = (content) => {
+  const text = getPlainText(content);
+  const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+
+  return `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
+};
+
+const formatDate = (date) => {
+  if (!date) return "";
+
+  const parsedDate = new Date(date);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return "";
+  }
+
+  return parsedDate.toLocaleDateString("en-IN", {
+    month: "long",
+    year: "numeric",
+  });
+};
+
+const normalizeTags = (tags) => {
+  if (!Array.isArray(tags)) return [];
+
+  const colors = [
+    "blue-text-gradient",
+    "green-text-gradient",
+    "pink-text-gradient",
+  ];
+
+  return tags
+    .map((tag, index) => {
+      if (typeof tag === "string") {
+        return {
+          name: tag,
+          color: colors[index % colors.length],
+        };
+      }
+
+      if (!tag || typeof tag.name !== "string") {
+        return null;
+      }
+
+      return {
+        name: tag.name,
+        color: tag.color || colors[index % colors.length],
+      };
+    })
+    .filter(Boolean);
+};
+
+const ArticleCard = ({
+  slug,
+  title,
   description,
+  category,
+  date,
+  readTime,
   tags,
   image,
-  source_code_link,
 }) => {
   return (
-    <div className='project-card-shell'>
+    <Link
+      to={`/blog/${slug}`}
+      className="project-card-shell cursor-pointer"
+      aria-label={`Read article: ${title}`}
+      style={{
+        color: "inherit",
+        textDecoration: "none",
+      }}
+    >
       <Tilt
         tiltMaxAngleX={12}
         tiltMaxAngleY={12}
         scale={1}
         transitionSpeed={450}
-        className='project-card'
+        className="project-card"
       >
-        <div className='project-image-wrap'>
+        <div className="project-image-wrap">
           <img
             src={image}
-            alt={`${name} project preview`}
-            className='project-image'
+            alt={title}
+            className="project-image"
+            loading="lazy"
           />
 
-          <div className='project-action-row'>
-            <a
-              href={source_code_link}
-              target='_blank'
-              rel='noreferrer'
-              aria-label={`Open ${name} project`}
-              className='project-link group'
-            >
-              <img
-                src={github}
-                alt=''
-                className='project-link-icon'
+          <div className="project-action-row">
+            <div className="project-link group">
+              <FaBookOpen className="project-link-icon" />
+
+              <FaExternalLinkAlt
+                className="project-link-arrow"
+                aria-hidden="true"
               />
-              <FaExternalLinkAlt className='project-link-arrow' aria-hidden='true' />
-              <span className='project-tooltip'>Open project</span>
-            </a>
+
+              <span className="project-tooltip">
+                Read article
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className='project-content'>
-          <h3 className='project-title'>
-            <FaLaptopCode className='project-title-icon' />
-            {name}
+        <div className="project-content">
+          <div className="flex items-center justify-between gap-3 mb-2">
+            <span className="text-[#915eff] text-[11px] font-bold uppercase tracking-widest font-['Space_Mono']">
+              {category}
+            </span>
+
+            <span className="text-secondary text-[11px] font-['Space_Mono']">
+              {readTime}
+            </span>
+          </div>
+
+          <h3 className="project-title">
+            <FaBookOpen className="project-title-icon" />
+            {title}
           </h3>
-          <p className='project-description'>{description}</p>
+
+          <p className="project-description">
+            {description}
+          </p>
+
+          <p className="text-secondary text-[11px] mt-3 font-['Space_Mono'] opacity-70">
+            {date}
+          </p>
         </div>
 
-        <div className='project-tags'>
-          {tags.map((tag) => (
+        <div className="project-tags">
+          {tags.map((tag, index) => (
             <span
-              key={`${name}-${tag.name}`}
+              key={`${slug}-${tag.name}-${index}`}
               className={`project-tag ${tag.color}`}
             >
               #{tag.name}
@@ -69,32 +161,149 @@ const ProjectCard = ({
           ))}
         </div>
       </Tilt>
-    </div>
+    </Link>
   );
 };
 
 const Works = () => {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const fetchArticles = async () => {
+      setLoading(true);
+      setError(false);
+
+      try {
+        const { data, error: fetchError } = await supabase
+          .from("articles")
+          .select(
+            "slug, title, description, subtitle, category, cover_image, tags, content, created_at"
+          )
+          .eq("published", true)
+          .order("created_at", { ascending: false });
+
+        if (fetchError) {
+          throw fetchError;
+        }
+
+        if (cancelled) return;
+
+        const formattedArticles = (data || [])
+          .filter((article) => article.slug && article.title)
+          .map((article) => ({
+            slug: article.slug,
+            title: article.title,
+            description:
+              article.description ||
+              article.subtitle ||
+              "Discover the latest technology insights from BuyKit.",
+            category: article.category || "Technology",
+            date: formatDate(article.created_at),
+            readTime: calculateReadTime(article.content),
+            tags: normalizeTags(article.tags),
+            image: article.cover_image || "/buykit.jpg",
+          }));
+
+        setArticles(formattedArticles);
+      } catch (fetchError) {
+        console.error(
+          "Failed to fetch published articles:",
+          fetchError
+        );
+
+        if (!cancelled) {
+          setError(true);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchArticles();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const openBlogEditor = () => {
+    window.location.href = "/write-blog";
+  };
+
   return (
     <>
-      <div className='projects-heading'>
-        <p className={`${styles.sectionSubText} font-["Playfair_Display"] italic tracking-wider`}>My work</p>
-        <h2 className={`${styles.sectionHeadText} font-["Oswald"] font-bold uppercase tracking-wide`}>Projects. <FaCode className="inline-block text-[#915eff]" /></h2>
+      <div className="projects-heading">
+        <p
+          className={`${styles.sectionSubText} font-["Playfair_Display"] italic tracking-wider`}
+        >
+          Latest from BuyKit
+        </p>
+
+        <h2
+          className={`${styles.sectionHeadText} font-["Oswald"] font-bold uppercase tracking-wide`}
+        >
+          Explore The World Of Tech.
+          <FaBookOpen className="inline-block text-[#915eff] ml-3" />
+        </h2>
       </div>
 
-      <div className='projects-intro'>
+      <div className="projects-intro">
         <p>
-          Following projects showcases my skills and experience through
-          real-world examples of my work. Each project is briefly described with
-          links to code repositories and live demos in it. It reflects my
-          ability to solve complex problems, work with different technologies,
-          and manage projects effectively.
+          Discover stories, insights, guides and ideas from the world of
+          technology. From artificial intelligence and gadgets to software,
+          digital trends and everything in between, BuyKit brings you
+          technology worth knowing.
         </p>
       </div>
 
-      <div className='projects-grid'>
-        {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} {...project} />
-        ))}
+      {loading && (
+        <p className="mt-10 text-secondary" role="status">
+          Loading the latest articles...
+        </p>
+      )}
+
+      {!loading && error && (
+        <p className="mt-10 text-secondary" role="alert">
+          We couldn't load the latest articles. Please refresh the page
+          and try again.
+        </p>
+      )}
+
+      {!loading && !error && articles.length === 0 && (
+        <p className="mt-10 text-secondary">
+          No published articles yet. Be the first to share something!
+        </p>
+      )}
+
+      {!loading && !error && articles.length > 0 && (
+        <div className="projects-grid">
+          {articles.map((article) => (
+            <ArticleCard
+              key={article.slug}
+              {...article}
+            />
+          ))}
+        </div>
+      )}
+
+      <div
+        className="flex w-full justify-start"
+        style={{ marginTop: "30px" }}
+      >
+        <button
+          type="button"
+          className="inline-flex items-center gap-3 rounded-xl bg-[#915eff] px-7 py-4 font-bold uppercase tracking-wide text-white shadow-lg shadow-[#915eff]/20 transition-all duration-300 hover:-translate-y-1 hover:bg-[#7c4dff] focus:outline-none focus:ring-2 focus:ring-[#915eff] focus:ring-offset-2 focus:ring-offset-[#050816]"
+          onClick={openBlogEditor}
+        >
+          <FaPenNib aria-hidden="true" />
+          <span>PUBLISH YOUR OWN ARTICLE</span>
+        </button>
       </div>
     </>
   );
