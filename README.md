@@ -4,7 +4,8 @@
 
 # BUYKIT ARTICLES
 
-### Fresh perspectives. Meaningful stories. One platform.
+### FRESH PERSPECTIVES. ON EVERYTHING THAT MATTERS.
+
 
 **A modern article publishing platform built to make sharing knowledge simple.**
 
