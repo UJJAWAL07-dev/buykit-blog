@@ -1,6 +1,6 @@
  <div align="center">
 
-<img src="docs/images/buykit-banner.jpg" alt="BuyKit Articles Banner" width="100%"/>
+<img src="docs/images/buykit-banner.jpg" alt="BuyKit Articles Banner" width="70%"/>
 
 # BUYKIT ARTICLES
 
