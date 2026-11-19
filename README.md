@@ -1,180 +1,267 @@
-# 𝕋𝕒𝕟𝕞𝕒𝕪 | 𝟯𝗗 𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿 𝗣𝗼𝗿𝘁𝗳𝗼𝗹𝗶𝗼
+ <div align="center">
 
-<div align="center">
-  <img src="https://github.com/adrianhajdin/project_3D_developer_portfolio/assets/151519281/4722160a-8e61-403f-a905-728feae1f7e6" alt="Project Banner" width="100%" />
-  <br/>
-  <br/>
-  
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
-  <img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-  <img src="https://img.shields.io/badge/Three.js-black?style=for-the-badge&logo=three.js&logoColor=white" alt="Three.js" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
-  <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion" />
+<img src="docs/images/buykit-banner.png" alt="BuyKit Articles Banner" width="100%"/>
 
-  <h3 align="center">✦ Ａｎ Ｉｍｍｅｒｓｉｖｅ ３Ｄ Ｗｅｂ Ｅｘｐｅｒｉｅｎｃｅ ✦</h3>
+# BUYKIT ARTICLES
+
+### Fresh perspectives. Meaningful stories. One platform.
+
+**A modern article publishing platform built to make sharing knowledge simple.**
+
+[![Website](https://img.shields.io/badge/Website-articles.buykit.in-8B5CF6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://articles.buykit.in/)
+[![React](https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-Powered-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
+[![Supabase](https://img.shields.io/badge/Supabase-Backend-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+
+[Explore Website](https://articles.buykit.in/) • [Report an Issue](../../issues) • [Contribute](../../pulls)
+
 </div>
 
-## 🤖 𝕀𝕟𝕥𝕣𝕠𝕕𝕦𝕔𝕥𝕚𝕠𝕟
+---
 
-Welcome to my **3D Developer Portfolio**. This project isn't just a showcase of work; it's a demonstration of modern web capabilities. Built with **React** and **Three.js**, it features a fully immersive 3D environment, interactive elements, and a high-end "cyber-tech" aesthetic.
+## About The Project
 
-The design system has been heavily customized to move beyond standard templates, introducing a unique typographic hierarchy and "*glowing*" visual effects that make every interaction feel premium.
+**BuyKit Articles** is a web-based article publishing platform developed under the BuyKit ecosystem.
 
-> **Note**: This project is an advanced enhancement and modification of the original [3D Developer Portfolio](https://github.com/adrianhajdin/project_3D_developer_portfolio) by [Adrian Hajdin](https://github.com/adrianhajdin).  @adrianhajdin
+The platform aims to provide a simple and accessible space where ideas, knowledge, opinions, and perspectives can be shared through well-written articles.
 
-## ⚡ 𝐅𝐞𝐚𝐭𝐮𝐫𝐞𝐬
+From technology and artificial intelligence to everyday discoveries, BuyKit Articles focuses on making informative content accessible to readers.
 
-### 🌌 𝗜𝗺𝗺𝗲𝗿𝘀𝗶𝘃𝗲 𝟯𝗗 𝗘𝗹𝗲𝗺𝗲𝗻𝘁𝘀
-- **Interactive Hero**: Features a 3D desktop model that users can rotate and explore.
-- **3D Stars Background**: A particle system that simulates depth and movement as you scroll.
-- **Floating Shapes**: Geometric 3D objects in the "Works" section.
-- **Physically Based Rendering**: Realistic lighting and shadows powered by **Rᴇᴀᴄᴛ Tʜʀᴇᴇ Fɪʙᴇʀ**.
+Our vision is to build a growing content platform where writers can share their knowledge and readers can discover something new.
 
-### 🎨 𝒜𝒹𝓋𝒶𝓃𝒸𝑒𝒹 𝒯𝓎𝓅𝑜𝑔𝓇𝒶𝓅𝒽𝓎 𝒮𝓎𝓈𝓉𝑒𝓂
-We have implemented a custom multi-font system to create a distinct visual hierarchy:
-- **Orbitron**: Used for tech keywords (e.g., "React", "Node.js") to give them a futuristic, glowing "token" look.
-- **Oswald**: Strong, industrial sans-serif for main section headings.
-- **Space Mono**: Monospace font for data-heavy elements like dates, skills, and tags, creating a "technical dashboard" feel.
-- **Playfair Display**: Elegant italic serif used for subtext to provide a sophisticated contrast.
-- **Sacramento**: A handwriting script used for the personal signature.
+## Preview
 
-### ✨ 𝕀𝕟𝕥𝕖𝕣𝕒𝕔𝕥𝕚𝕧𝕖 𝕌𝕀 ℂ𝕠𝕞𝕡𝕠𝕟𝕖𝕟𝕥𝕤
-- **Experience Timeline**: Vertical timeline cards with a special "Current" badge that pulses for your present role.
-- **Project Cards**: Tilt-enabled cards that respond to mouse movement, with consistent iconography (`FaLaptopCode`).
-- **Testimonials**: Feedback cards with integrated dates and author details.
-- **Contact Form**: Functional 3D earth model accompanying a working email form.
+<div align="center">
 
-## 🛠️ 𝚃𝚎𝚌𝚑 𝚂𝚝𝚊𝚌𝚔
 
-- **Core**: [React 18](https://reactjs.org/), [Vite](https://vitejs.dev/)
-- **3D & Graphics**: 
-  - [Three.js](https://threejs.org/)
-  - [@react-three/fiber](https://docs.pmnd.rs/react-three-fiber)
-  - [@react-three/drei](https://github.com/pmndrs/drei)
-  - [Maath](https://github.com/pmndrs/maath) (Math tools for UI)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **Utilities**: 
-  - [EmailJS](https://www.emailjs.com/) (Form handling)
-  - [React Vertical Timeline](https://github.com/stephane-monnot/react-vertical-timeline)
-  - [React Tilt](https://github.com/jonathandion/react-tilt)
+<img src="docs/images/homepage.png" alt="BuyKit Articles Homepage" width="90%"/>
 
-## 📥 𝘐𝘯𝘴𝘵𝘢𝘭𝘭𝘢𝘵𝘪𝘰𝘯 & 𝘋𝘦𝘱𝘦𝘯𝘥𝘦𝘯𝘤𝘪𝘦𝘴
+*BuyKit Articles — Homepage*
 
-This project requires **Node.js** (v16 or higher) to manage dependencies.
+</div>
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/your-username/3d-portfolio.git
-    cd 3d-portfolio
-    ```
+## Features
 
-2.  **Install all dependencies (Precise Method)**
-    The project uses `npm` to manage packages. Run the following command to strictly install all required modules listed in `package.json`:
-    ```bash
-    npm install
-    ```
-    This command reads the `package.json` file and installs the exact versions of the libraries needed.
+| Feature | Description |
+|---|---|
+| Article Publishing | Create and publish articles through the publishing system. |
+| Dynamic Article Pages | Every article has its own dedicated URL. |
+| Content Management | Manage published content through the backend. |
+| Responsive Interface | Designed for a modern browsing experience. |
+| Database Integration | Supabase-powered data storage. |
+| XML Sitemap | Helps search engines discover published content. |
+| SEO Foundation | Search-engine-friendly article URLs and sitemap support. |
 
-    <details>
-    <summary>Click to view all installed modules</summary>
+## Technology Stack
 
-    **Core Dependencies (`dependencies`):**
-    - `react`, `react-dom`: Core UI library.
-    - `three`, `@react-three/fiber`, `@react-three/drei`: 3D rendering engine and helpers.
-    - `framer-motion`: For complex 2D and 3D animations.
-    - `maath`: Mathematics library for 3D interactions.
-    - `react-vertical-timeline-component`: For the Experience timeline.
-    - `react-tilt`: For interactive card effects.
-    - `react-icons`: Icon pack.
-    - `@emailjs/browser`: For the contact form functionality.
+BuyKit Articles uses modern web technologies to provide a fast and maintainable publishing experience.
 
-    **Development Dependencies (`devDependencies`):**
-    - `vite`, `@vitejs/plugin-react`: Fast build tool and development server.
-    - `tailwindcss`, `postcss`, `autoprefixer`: CSS styling framework.
+<div align="center">
 
-    </details>
+| Technology | Purpose |
+|---|---|
+| React | Frontend interface |
+| Vite | Development and build tooling |
+| JavaScript | Application logic |
+| Supabase | Backend and database |
+| React Router | Client-side navigation |
+| Vercel | Website deployment |
 
-3.  **Set up Environment Variables**
-    Create a `.env` file in the root directory to configure the contact form (EmailJS).
-    ```env
-    VITE_APP_EMAILJS_SERVICE_ID=your_service_id
-    VITE_APP_EMAILJS_TEMPLATE_ID=your_template_id
-    VITE_APP_EMAILJS_PUBLIC_KEY=your_public_key
-    ```
-    *Note: You can get these keys by signing up locally at [EmailJS](https://www.emailjs.com/).*
+</div>
 
-4.  **Run the development server**
-    Start the local server to view the website:
-    ```bash
-    npm run dev
-    ```
-    The application will launch at `http://localhost:5173`.
+### Technology Overview
 
-## 📂 𝕻𝖗𝖔𝖏𝖊𝖈𝖙 𝕾𝖙𝖗𝖚𝖈𝖙𝖚𝖗𝖊
+<div align="center">
 
+<img src="https://skillicons.dev/icons?i=react,vite,js,supabase,git,github,vercel" alt="Technology stack" />
+
+</div>
+
+## How It Works
+
+The platform follows a frontend-to-backend architecture.
+
+```mermaid
+flowchart TD
+    A["Reader / Writer"] --> B["BuyKit Articles Website"]
+    B --> C["React + Vite"]
+    C --> D["Application Logic"]
+    D --> E["Supabase Backend"]
+    E --> F["Articles Database"]
+    F --> D
+    D --> G["Published Article Pages"]
+    G --> H["Readers"]
 ```
-3d-portfolio/
-├── public/                 # Static assets (favicons, textures)
-│   └── desktop_pc/         # GLTF 3D models and textures
+
+### Publishing Workflow
+
+```mermaid
+flowchart LR
+    A["Write Article"] --> B["Submit / Publish"]
+    B --> C["Store in Supabase"]
+    C --> D["Display on Website"]
+    D --> E["Discover Through Sitemap"]
+    E --> F["Search Engines"]
+```
+
+## Project Structure
+
+The project follows a typical React and Vite application structure.
+
+```text
+buykit-articles/
+│
+├── public/
+│   ├── sitemap.xml
+│   └── assets/
+│
 ├── src/
-│   ├── assets/             # Project assets
-│   │   ├── company/        # Company logos (Meta, Shopify, etc.)
-│   │   ├── tech/           # Tech stack icons (React, ThreeJS, etc.)
-│   │   └── ...             # Miscellaneous images
-│   ├── components/         # React UI Components
-│   │   ├── canvas/         # 3D Scenes & Wrappers
-│   │   │   ├── Ball.jsx    # Interactive 3D Ball
-│   │   │   ├── Computers.jsx # Hero 3D Desktop Scene
-│   │   │   ├── Earth.jsx   # 3D Earth Contact Model
-│   │   │   ├── Stars.jsx   # Background Starfield
-│   │   │   └── index.js    # Canvas Exports
-│   │   ├── About.jsx       # About Section
-│   │   ├── Contact.jsx     # Contact Section
-│   │   ├── Experience.jsx  # Work Experience Timeline
-│   │   ├── Feedbacks.jsx   # Testimonials Section
-│   │   ├── Hero.jsx        # Landing Page 3D Hero
-│   │   ├── Navbar.jsx      # Navigation Bar
-│   │   ├── Works.jsx       # Project Portfolio Section
-│   │   ├── Loader.jsx      # 3D Loading Spinner
-│   │   ├── Tech.jsx        # Skills Section
-│   │   └── ...             # Inputs, Buttons, etc.
-│   ├── constants/
-│   │   └── index.js        # Central Data (Text, links, configs)
-│   ├── hoc/
-│   │   └── SectionWrapper.jsx # Higher-Order Component for animations
-│   ├── utils/
-│   │   └── motion.js       # Framer Motion variance configs
-│   ├── App.jsx             # Main Application Entry
-│   ├── main.jsx            # React DOM Root
-│   └── index.css           # Global Styles & Typography Import
-├── .env                    # Environment Variables (EmailJS)
-├── index.html              # HTML Entry Point
-├── package.json            # Project Dependencies
-├── tailwind.config.cjs     # Tailwind Configuration
-└── vite.config.js          # Vite Configuration
+│   ├── components/
+│   ├── pages/
+│   ├── assets/
+│   └── ...
+│
+├── docs/
+│   └── images/
+│
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
 ```
 
-## 🛠️ ᑕᑌᔕTOᗰIZᗩTIOᑎ
+*The structure above is illustrative. Actual folders may differ depending on the current implementation.*
 
-### 𝐔𝐩𝐝𝐚𝐭𝐢𝐧𝐠 𝐂𝐨𝐧𝐭𝐞𝐧𝐭
-All text content is centrally managed in `src/constants/index.js`. You can easily update:
-- **Nav Links**: Navigation menu items.
-- **Services**: Cards shown in the About section.
-- **Technologies**: Skills icons.
-- **Experiences**: Work history (add `skills: []` array for new entries).
-- **Testimonials**: Client feedback (add `date` field for timestamps).
-- **Projects**: Portfolio items.
+## Getting Started
 
-### 𝐂𝐡𝐚𝐧𝐠𝐢𝐧𝐠 𝐅𝐨𝐧𝐭𝐬
-Fonts are imported in `src/index.css`. To change them, simply update the Google Fonts import URL and modify the Tailwind classes in the respective components.
+Want to explore the project or run it locally? Follow these instructions.
+
+### Prerequisites
+
+Make sure you have installed:
+
+- [Node.js](https://nodejs.org/)
+- npm
+- [Git](https://git-scm.com/)
+- A Supabase project with the required database configuration.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/UJJAWAL07-dev/buykit-blog.git
+```
+
+### 2. Navigate to the Project
+
+```bash
+cd YOUR_REPOSITORY
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure Environment Variables
+
+Create a `.env.local` file in the project root.
+
+Add the Supabase credentials expected by your application.
+
+For a typical Vite Supabase setup:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+Use the actual environment variable names required by the existing source code.
+
+**Security:** Never expose Supabase service-role keys, database passwords, or other private credentials in frontend code or public repositories.
+
+### 5. Start the Development Server
+
+```bash
+npm run dev
+```
+
+Open the local URL displayed in your terminal to explore the application.
+
+## Screenshots
+
+A closer look at the platform.
+
+<div align="center">
+
+<img src="docs/images/homepage.png" alt="Homepage" width="85%"/>
+
+**Homepage**
+
+<img src="docs/images/article-page.png" alt="Article Page" width="85%"/>
+
+**Article Reading Experience**
+
+<img src="docs/images/publishing-page.png" alt="Publishing Interface" width="85%"/>
+
+**Article Publishing Interface**
+
+</div>
+
+*Screenshots can be added to the `docs/images/` directory.*
+
+## Future Roadmap
+
+We believe BuyKit Articles can grow into more than just a publishing website.
+
+Our planned improvements include:
+
+- [ ] Multi-author registration and authentication.
+- [ ] Individual writer profiles.
+- [ ] Admin-controlled article approval system.
+- [ ] Improved content discovery and categorization.
+- [ ] Enhanced SEO and metadata management.
+- [ ] Analytics and readership insights.
+- [ ] Improved reading and writing experience.
+
+These are planned improvements and are not necessarily available in the current release.
+
+## Contributing
+
+We welcome ideas, suggestions, and contributions that can make BuyKit Articles better.
+
+If you are interested in contributing:
+
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Test your implementation.
+5. Submit a Pull Request.
+
+Please open an issue before making major changes so that the proposed improvements can be discussed.
+
+## Part of the BuyKit Ecosystem
+
+BuyKit Articles is part of **BuyKit**, an evolving digital platform focused on useful tools, technology, ideas, and information.
+
+Visit the main website:
+
+**[https://buykit.in](https://buykit.in)**
+
+Explore the article platform:
+
+**[https://articles.buykit.in](https://articles.buykit.in)**
 
 ---
 
 <div align="center">
-  Made with ❤️ by <b>Tanmay</b>
+
+### BUYKIT ARTICLES
+
+**Ideas deserve to be shared.**
+
+Built with curiosity, creativity, and technology.
+
+[Website](https://articles.buykit.in/) · [BuyKit](https://buykit.in/)
+
 </div>
