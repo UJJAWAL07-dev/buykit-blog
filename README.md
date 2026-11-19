@@ -266,3 +266,13 @@ Built with curiosity, creativity, and technology.
 [Website](https://articles.buykit.in/) · [BuyKit](https://buykit.in/)
 
 </div>
+## Project Status
+
+BuyKit Articles is an actively evolving project.
+
+The platform is currently focused on improving its
+publishing experience, content management, and
+search engine visibility.
+
+New features and improvements will be introduced
+as the project develops.
